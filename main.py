@@ -4,11 +4,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Index'
+    user_ip = request.remote_addr
+    response = make_response(redirect('/hello'))
+    response.set_cookie('user_ip', user_ip)
+    return response
 
 @app.route('/hello')
 def hello():
-    return 'Hello world - Flask'
+    user_ip = request.cookies.get('user_ip')
+    return 'Your IP address is: {}'.format(user_ip)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

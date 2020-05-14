@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  </head>
-  <body>
-    <h3>Hello world - Flask</h3>
-    {% if user_ip %}
-      <h4>You're IP address is: <b>{{ user_ip }}</b></h4>
-    {% else %}
-      <a href="{{ url_for('index') }}">Go to Index</a>
-    {% endif %}
-    <br>
-    <ul>
-      {% for todo in todos %}
-        <li>{{ todo }}</li>
-      {% endfor %}
-    </ul>
-  </body>
-</html>
+{% extends 'base/base.html' %}
+{% import 'base/macros.html' as macros %}
+
+{% block title %}
+  {{ super() }}
+  Hello
+{% endblock %}
+{% block content %}
+  <h3>Hello world - Flask</h3>
+  {% if user_ip %}
+    <h4>You're IP address is: <b>{{ user_ip }}</b></h4>
+  {% else %}
+    <a href="{{ url_for('index') }}">Go to Index</a>
+  {% endif %}
+  <ul>
+    {% for todo in todos %}
+      {{ macros.render_todo(todo) }}
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -2,7 +2,7 @@ from flask import Flask, request, make_response, redirect, render_template
 
 app = Flask(__name__)
 
-todos = ['TODO 1', 'TODO 2', 'TODO 3']
+todos = ['Buy coffee', 'Study Flask', 'Eat many things']
 
 @app.route('/')
 def index():
@@ -15,6 +15,7 @@ def index():
 def hello():
     user_ip = request.cookies.get('user_ip')
     context = {
+        'title': 'Hello',
         'user_ip': user_ip,
         'todos': todos
     }

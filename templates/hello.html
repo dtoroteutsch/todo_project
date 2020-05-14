@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h3>Hello world - Flask</h3>
+    {% if user_ip %}
+      <h4>You're IP address is: <b>{{ user_ip }}</b></h4>
+    {% else %}
+      <a href="{{ url_for('index') }}">Go to Index</a>
+    {% endif %}
+  </body>
+</html>

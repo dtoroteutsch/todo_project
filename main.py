@@ -1,6 +1,8 @@
 from flask import Flask, request, make_response, redirect, render_template, session
 from flask_bootstrap import Bootstrap
 
+from forms import LoginForm
+
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
@@ -22,10 +24,12 @@ def index():
 @app.route('/hello')
 def hello():
     user_ip = session.get('user_ip')
+    login_form = LoginForm()
     context = {
         'title': 'Hello',
         'user_ip': user_ip,
-        'todos': todos
+        'todos': todos,
+        'login_form': login_form
     }
     return render_template('hello.html', **context)
 

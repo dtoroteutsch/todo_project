@@ -1,17 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>
-      {% block title %}Flask |{% endblock %}
-    </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"
-  </head>
-  <body>
-    <header>
-      {% include 'base/navbar.html' %}
-    </header>
-    {% block content %}
-    {% endblock %}
-  </body>
-</html>
+{% extends 'bootstrap/base.html' %}
+{% block head %}
+  {{ super() }}
+  <title>
+    {% block title %}Flask |{% endblock %}
+  </title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+{% block body %}
+  {% block navbar %}
+    <div class="bs-docs-nav navbar navbar-static-top">
+        {% include 'base/navbar.html' %}
+    </div>
+  {% endblock %}
+  <div class="container bs-docs-container">
+    <div class="row">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+{% endblock %}

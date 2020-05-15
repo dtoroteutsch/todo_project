@@ -4,6 +4,10 @@ app = Flask(__name__)
 
 todos = ['Buy coffee', 'Study Flask', 'Eat many things']
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('errors/404.html', error=error)
+
 @app.route('/')
 def index():
     user_ip = request.remote_addr

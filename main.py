@@ -1,6 +1,7 @@
 from flask import Flask, request, make_response, redirect
 from flask import render_template, session, url_for, flash
 from flask_bootstrap import Bootstrap
+import unittest
 
 from forms import LoginForm
 
@@ -10,6 +11,11 @@ bootstrap = Bootstrap(app)
 app.config['SECRET_KEY'] = '1Nw4rdH33lfl1p'
 
 todos = ['Buy coffee', 'Study Flask', 'Eat many things']
+
+@app.cli.command()
+def test():
+    tests =  unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner().run(tests)
 
 @app.errorhandler(404)
 def page_not_found(error):

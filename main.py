@@ -1,4 +1,5 @@
-from flask import Flask, request, make_response, redirect, render_template, session, url_for
+from flask import Flask, request, make_response, redirect
+from flask import render_template, session, url_for, flash
 from flask_bootstrap import Bootstrap
 
 from forms import LoginForm
@@ -17,8 +18,10 @@ def page_not_found(error):
 @app.route('/')
 def index():
     user_ip = request.remote_addr
+
     response = make_response(redirect('/hello'))
     session['user_ip'] = user_ip
+
     return response
 
 @app.route('/hello', methods=['GET', 'POST'])
@@ -26,6 +29,7 @@ def hello():
     user_ip = session.get('user_ip')
     login_form = LoginForm()
     username = session.get('username')
+
     context = {
         'title': 'Hello',
         'user_ip': user_ip,
@@ -33,10 +37,12 @@ def hello():
         'login_form': login_form,
         'username': username
     }
+
     if login_form.validate_on_submit():
         username = login_form.username.data
         session['username'] = username
-        redirect(url_for('index'))
+        flash('User logged successfully')
+        return redirect(url_for('index'))
 
     return render_template('hello.html', **context)
 

@@ -8,11 +8,18 @@
 {% endblock %}
 {% block content %}
   <h3>Hello world - Flask</h3>
-  {% if user_ip %}
+  {% if user_ip and username%}
+    <h4>Hi {{ username | capitalize }}!! - You're IP address is: <b>{{ user_ip }}</b></h4>
+  {% elif user_ip%}
     <h4>You're IP address is: <b>{{ user_ip }}</b></h4>
   {% else %}
     <a href="{{ url_for('index') }}">Go to Index</a>
   {% endif %}
+  <ul>
+    {% for todo in todos %}
+      {{ macros.render_todo(todo) }}
+    {% endfor %}
+  </ul>
   <div class="container">
     <!--
     <form action="{{ url_for('hello') }}" method="POST">
@@ -22,9 +29,4 @@
     -->
     {{ wtf.quick_form(login_form) }}
   </div>
-  <ul>
-    {% for todo in todos %}
-      {{ macros.render_todo(todo) }}
-    {% endfor %}
-  </ul>
 {% endblock %}

@@ -1,14 +1,12 @@
-from flask import Flask, request, make_response, redirect
+from flask import request, make_response, redirect
 from flask import render_template, session, url_for, flash
 from flask_bootstrap import Bootstrap
 import unittest
 
-from forms import LoginForm
+from app import create_app
+from app.forms import LoginForm
 
-app = Flask(__name__)
-bootstrap = Bootstrap(app)
-
-app.config['SECRET_KEY'] = '1Nw4rdH33lfl1p'
+app = create_app()
 
 todos = ['Buy coffee', 'Study Flask', 'Eat many things']
 
